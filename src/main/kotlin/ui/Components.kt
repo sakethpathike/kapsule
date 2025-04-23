@@ -107,3 +107,11 @@ fun FlowContent.Box(modifier: Modifier, init: DIV.() -> Unit) {
         init()
     }
 }
+
+fun FlowContent.Button(modifier: Modifier, onClick: () -> String, content: BUTTON.() -> Unit) {
+    button(type = ButtonType.button) {
+        style = modifier.buildStyle()
+        this.onClick = onClick()
+        content()
+    }
+}
