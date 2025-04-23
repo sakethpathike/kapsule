@@ -19,7 +19,7 @@ fun HTML.Surface(style: String, content: BODY.() -> Unit = {}) {
 }
 
 fun DIV.Text(
-    text: String, fontSize: String, textOverflow: String = "ellipsis", modifier: Modifier = Modifier()
+    text: String, fontSize: String = 12.px, textOverflow: String = "ellipsis", modifier: Modifier = Modifier()
 ) {
     div {
         style = modifier.buildStyle() + """
@@ -27,7 +27,6 @@ fun DIV.Text(
             white-space: nowrap;
             overflow: hidden;
             text-overflow: $textOverflow;
-            display: inline-block;
         """.trimIndent()
         +text
     }
@@ -42,28 +41,67 @@ fun BODY.Text(
             white-space: nowrap;
             overflow: hidden;
             text-overflow: $textOverflow;
-            display: inline-block;
         """.trimIndent()
         +text
     }
 }
 
-fun BODY.Column(modifier: Modifier = Modifier(), content: DIV.() -> Unit) {
+enum class VerticalAlignment(val cssValue: String) {
+    Top("flex-start"), Center("center"), Bottom("flex-end"), SpaceBetween("space-between"), SpaceAround("space-around"), SpaceEvenly(
+        "space-evenly"
+    ),
+    None("")
+}
+
+enum class HorizontalAlignment(val cssValue: String) {
+    Start("flex-start"), Center("center"), End("flex-end"), Stretch("stretch"), None("")
+}
+
+fun FlowContent.Column(
+    modifier: Modifier = Modifier(),
+    verticalAlignment: VerticalAlignment,
+    horizontalAlignment: HorizontalAlignment,
+    content: DIV.() -> Unit
+) {
     div {
-        style = "display: flex; flex-direction: column; " + modifier.buildStyle()
+        style =
+            "display: flex; flex-direction: column; ${if (verticalAlignment.cssValue.isNotBlank()) "justify-content: ${verticalAlignment.cssValue}; " else ""}; ${if (horizontalAlignment.cssValue.isNotBlank()) "align-items: ${horizontalAlignment.cssValue}; " else ""}" + modifier.buildStyle()
         content()
     }
 }
 
-fun BODY.Row(modifier: Modifier = Modifier(), content: DIV.() -> Unit) {
+
+fun FlowContent.Row(
+    modifier: Modifier = Modifier(),
+    verticalAlignment: VerticalAlignment,
+    horizontalAlignment: HorizontalAlignment,
+    content: DIV.() -> Unit
+) {
     div {
-        style = "display: flex; flex-direction: row; " + modifier.buildStyle()
+        style = buildString {
+            append("display: flex; ")
+            append("flex-direction: row; ")
+            if (verticalAlignment.cssValue.isNotBlank()) {
+                append("justify-content: ${verticalAlignment.cssValue}; ")
+            }
+            if (horizontalAlignment.cssValue.isNotBlank()) {
+                append("align-items: ${horizontalAlignment.cssValue}; ")
+            }
+            append(modifier.buildStyle())
+        }
         content()
     }
 }
 
-fun DIV.Spacer(modifier: Modifier = Modifier()) {
+fun FlowContent.Spacer(modifier: Modifier = Modifier()) {
     div {
         style = modifier.buildStyle()
+    }
+}
+
+fun FlowContent.Box(modifier: Modifier, init: DIV.() -> Unit) {
+    div {
+        style = modifier.buildStyle()
+        init()
     }
 }

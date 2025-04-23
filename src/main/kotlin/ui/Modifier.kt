@@ -64,16 +64,29 @@ class Modifier {
         finalStyle.append("flex-grow: $value;")
     }
 
+    /**
+    Sets width to 100% of the parent.
+    - Use this only when the parent has a defined width.
+     */
     fun fillMaxWidth(fraction: Double = 1.0) = this.also {
         require(fraction in 0.0..1.0) { "Fraction must be between 0 and 1" }
         finalStyle.append("width: ${fraction * 100}%; ")
     }
 
+    /**
+    Sets height to 100% of the parent.
+    - Use this only when the parent has a defined height.
+     */
     fun fillMaxHeight(fraction: Double = 1.0) = this.also {
         require(fraction in 0.0..1.0) { "Fraction must be between 0 and 1" }
         finalStyle.append("height: ${fraction * 100}%; ")
     }
 
+    /**
+    Sets width and height to 100% of the parent.
+    - Use this only when the parent has a defined height and width.
+    - Use [fillViewportSize] when you want to fill the full screen.
+     * */
     fun fillMaxSize(fraction: Double = 1.0) = this.also {
         fillMaxWidth(fraction)
         fillMaxHeight(fraction)
@@ -97,6 +110,21 @@ class Modifier {
         combinedModifier.finalStyle.append(this.finalStyle)
         combinedModifier.finalStyle.append(other.finalStyle)
         return combinedModifier
+    }
+
+    /**
+    Use `fillViewportSize()` when you want an element to fill the full screen.
+     */
+    fun fillViewportSize() = this.also {
+        finalStyle.append("width: 100vw; height: 100vh; ")
+    }
+
+    fun minHeight(value: String) = this.also {
+        finalStyle.append("min-height: $value; ")
+    }
+
+    fun minWidth(value: String) = this.also {
+        finalStyle.append("min-width: $value; ")
     }
 
     fun buildStyle(): String = finalStyle.toString().trim()
