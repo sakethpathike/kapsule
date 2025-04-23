@@ -3,8 +3,17 @@ package sakethh.ui
 import kotlinx.html.*
 
 fun HTML.Surface(
-    modifier: Modifier, content: BODY.() -> Unit = {}
+    modifier: Modifier,
+    /**List of font URLs*/
+    fonts: List<String> = emptyList(), content: BODY.() -> Unit = {}
 ) {
+    head {
+        fonts.filter { font ->
+            font.startsWith("http")
+        }.forEach { font ->
+            link(href = font, rel = "stylesheet")
+        }
+    }
     body {
         style = modifier.buildStyle()
         content()
@@ -18,26 +27,19 @@ fun HTML.Surface(style: String, content: BODY.() -> Unit = {}) {
     }
 }
 
-fun DIV.Text(
-    text: String, fontSize: String = 12.px, textOverflow: String = "ellipsis", modifier: Modifier = Modifier()
+fun FlowContent.Text(
+    text: String,
+    fontSize: String = 12.px,
+    fontFamily: String,
+    textColor: String,
+    textOverflow: String = "ellipsis",
+    modifier: Modifier = Modifier()
 ) {
     div {
         style = modifier.buildStyle() + """
+            color: $textColor;
+            font-family: "$fontFamily";
             font-size: $fontSize;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: $textOverflow;
-        """.trimIndent()
-        +text
-    }
-}
-
-fun BODY.Text(
-    text: String, fontSize: Int, textOverflow: String = "ellipsis", modifier: Modifier = Modifier()
-) {
-    div {
-        style = modifier.buildStyle() + """
-            font-size: ${fontSize}px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: $textOverflow;
@@ -59,8 +61,8 @@ enum class HorizontalAlignment(val cssValue: String) {
 
 fun FlowContent.Column(
     modifier: Modifier = Modifier(),
-    verticalAlignment: VerticalAlignment,
-    horizontalAlignment: HorizontalAlignment,
+    verticalAlignment: VerticalAlignment = VerticalAlignment.None,
+    horizontalAlignment: HorizontalAlignment = HorizontalAlignment.None,
     content: DIV.() -> Unit
 ) {
     div {
@@ -73,8 +75,8 @@ fun FlowContent.Column(
 
 fun FlowContent.Row(
     modifier: Modifier = Modifier(),
-    verticalAlignment: VerticalAlignment,
-    horizontalAlignment: HorizontalAlignment,
+    verticalAlignment: VerticalAlignment = VerticalAlignment.None,
+    horizontalAlignment: HorizontalAlignment = HorizontalAlignment.None,
     content: DIV.() -> Unit
 ) {
     div {
