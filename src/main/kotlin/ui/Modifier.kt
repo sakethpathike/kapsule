@@ -64,6 +64,34 @@ class Modifier {
         finalStyle.append("flex-grow: $value;")
     }
 
+    fun fillMaxWidth(fraction: Double = 1.0) = this.also {
+        require(fraction in 0.0..1.0) { "Fraction must be between 0 and 1" }
+        finalStyle.append("width: ${fraction * 100}%; ")
+    }
+
+    fun fillMaxHeight(fraction: Double = 1.0) = this.also {
+        require(fraction in 0.0..1.0) { "Fraction must be between 0 and 1" }
+        finalStyle.append("height: ${fraction * 100}%; ")
+    }
+
+    fun fillMaxSize(fraction: Double = 1.0) = this.also {
+        fillMaxWidth(fraction)
+        fillMaxHeight(fraction)
+    }
+
+    fun matchParentWidth() = this.also {
+        finalStyle.append("width: 100%; ")
+    }
+
+    fun matchParentHeight() = this.also {
+        finalStyle.append("height: 100%; ")
+    }
+
+    fun matchParentSize() = this.also {
+        matchParentWidth()
+        matchParentHeight()
+    }
+
     fun then(other: Modifier): Modifier {
         val combinedModifier = Modifier()
         combinedModifier.finalStyle.append(this.finalStyle)
