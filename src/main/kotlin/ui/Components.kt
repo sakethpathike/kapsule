@@ -9,8 +9,8 @@ fun HTML.Surface(
     style: STYLE.() -> Unit = {},
     className: String? = null,
     id: String? = null,
-    headProperties: HEAD.() -> Unit = {},
-    bodyProperties: BODY.() -> Unit = {},
+    onTheHeadElement: HEAD.() -> Unit = {},
+    onTheBodyElement: BODY.() -> Unit = {},
     content: BODY.() -> Unit = {}
 ) {
     head {
@@ -23,14 +23,14 @@ fun HTML.Surface(
         style {
            style()
         }
-        headProperties()
+        onTheHeadElement()
     }
     body(classes = className) {
         if (id != null) {
             this.id = id
         }
         this.style = modifier.buildStyle()
-        bodyProperties()
+        onTheBodyElement()
         content()
     }
 }
