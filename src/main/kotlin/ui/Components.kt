@@ -200,7 +200,7 @@ fun FlowContent.TextInputField(
     fontWeight: String,
     fontSize: String,
     fontFamily: String,
-    modifier: Modifier, onThisElement: (INPUT) -> Unit = {}
+    modifier: Modifier, onThisElement: INPUT.() -> Unit = {}
 ) {
     textInput(classes = className) {
         if (id != null) {
@@ -213,6 +213,6 @@ fun FlowContent.TextInputField(
             append(modifier.buildStyle())
         }
         this.value = value
-        onThisElement(this)
+        onThisElement()
     }
 }
