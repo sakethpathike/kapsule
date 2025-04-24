@@ -9,6 +9,8 @@ fun HTML.Surface(
     style: STYLE.() -> Unit = {},
     className: String? = null,
     id: String? = null,
+    headProperties: HEAD.() -> Unit = {},
+    bodyProperties: BODY.() -> Unit = {},
     content: BODY.() -> Unit = {}
 ) {
     head {
@@ -21,22 +23,31 @@ fun HTML.Surface(
         style {
            style()
         }
+        headProperties()
     }
     body(classes = className) {
         if (id != null) {
             this.id = id
         }
         this.style = modifier.buildStyle()
+        bodyProperties()
         content()
     }
 }
 
-fun HTML.Surface(style: String, className: String? = null, id: String? = null, content: BODY.() -> Unit = {}) {
+fun HTML.Surface(
+    style: String,
+    className: String? = null,
+    onThisElement: BODY.() -> Unit = {},
+    id: String? = null,
+    content: BODY.() -> Unit = {}
+) {
     body(classes = className) {
         if (id != null) {
             this.id = id
         }
         this.style = style
+        onThisElement()
         content()
     }
 }
@@ -49,6 +60,7 @@ fun FlowContent.Text(
     fontWeight: String,
     className: String? = null,
     id: String? = null,
+    onThisElement: DIV.() -> Unit = {},
     modifier: Modifier = Modifier()
 ) {
     div(classes = className) {
@@ -61,6 +73,7 @@ fun FlowContent.Text(
             font-family: "$fontFamily";
             font-size: $fontSize;
         """.trimIndent()
+        onThisElement()
         +text
     }
 }
@@ -80,6 +93,7 @@ fun FlowContent.Column(
     modifier: Modifier = Modifier(),
     verticalAlignment: VerticalAlignment = VerticalAlignment.None,
     horizontalAlignment: HorizontalAlignment = HorizontalAlignment.None, className: String? = null, id: String? = null,
+    onThisElement: DIV.() -> Unit = {},
     content: DIV.() -> Unit
 ) {
     div(classes = className) {
@@ -88,6 +102,7 @@ fun FlowContent.Column(
         }
         style =
             "display: flex; flex-direction: column; ${if (verticalAlignment.cssValue.isNotBlank()) "justify-content: ${verticalAlignment.cssValue}; " else ""}; ${if (horizontalAlignment.cssValue.isNotBlank()) "align-items: ${horizontalAlignment.cssValue}; " else ""}" + modifier.buildStyle()
+        onThisElement()
         content()
     }
 }
@@ -97,6 +112,7 @@ fun FlowContent.Row(
     modifier: Modifier = Modifier(),
     verticalAlignment: VerticalAlignment = VerticalAlignment.None,
     horizontalAlignment: HorizontalAlignment = HorizontalAlignment.None, className: String? = null, id: String? = null,
+    onThisElement: DIV.() -> Unit = {},
     content: DIV.() -> Unit
 ) {
     div(classes = className) {
@@ -114,35 +130,47 @@ fun FlowContent.Row(
             }
             append(modifier.buildStyle())
         }
+        onThisElement()
         content()
     }
 }
 
 fun FlowContent.Spacer(
-    className: String? = null, id: String? = null, modifier: Modifier = Modifier()
+    className: String? = null, id: String? = null, onThisElement: DIV.() -> Unit = {}, modifier: Modifier = Modifier()
 ) {
     div(classes = className) {
         if (id != null) {
             this.id = id
         }
         style = modifier.buildStyle()
+        onThisElement()
     }
 }
 
 fun FlowContent.Box(
-    modifier: Modifier, className: String? = null, id: String? = null, init: DIV.() -> Unit
+    modifier: Modifier,
+    className: String? = null,
+    onThisElement: DIV.() -> Unit = {},
+    id: String? = null,
+    init: DIV.() -> Unit
 ) {
     div(classes = className) {
         if (id != null) {
             this.id = id
         }
         style = modifier.buildStyle()
+        onThisElement()
         init()
     }
 }
 
 fun FlowContent.Button(
-    modifier: Modifier, className: String? = null, id: String? = null, onClick: () -> String, content: BUTTON.() -> Unit
+    modifier: Modifier,
+    className: String? = null,
+    onThisElement: BUTTON.() -> Unit = {},
+    id: String? = null,
+    onClick: () -> String,
+    content: BUTTON.() -> Unit
 ) {
     button(classes = className, type = ButtonType.button) {
         if (id != null) {
@@ -150,6 +178,7 @@ fun FlowContent.Button(
         }
         style = modifier.buildStyle()
         this.onClick = onClick()
+        onThisElement()
         content()
     }
 }
@@ -161,8 +190,7 @@ fun FlowContent.TextInputField(
     fontWeight: String,
     fontSize: String,
     fontFamily: String,
-    modifier: Modifier,
-    properties: (INPUT) -> Unit = {}
+    modifier: Modifier, onThisElement: (INPUT) -> Unit = {}
 ) {
     textInput(classes = className) {
         if (id != null) {
@@ -174,6 +202,6 @@ fun FlowContent.TextInputField(
             font-weight: $fontWeight;
         """.trimIndent()+ modifier.buildStyle()
         this.value = value
-        properties(this)
+        onThisElement(this)
     }
 }
