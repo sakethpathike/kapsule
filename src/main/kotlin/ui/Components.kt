@@ -30,19 +30,15 @@ fun HTML.Surface(style: String, content: BODY.() -> Unit = {}) {
 fun FlowContent.Text(
     text: String,
     fontSize: String = 12.px,
-    fontFamily: String,
-    textColor: String,
-    textOverflow: String = "ellipsis",
+    fontFamily: String, color: String, fontWeight: String,
     modifier: Modifier = Modifier()
 ) {
     div {
         style = modifier.buildStyle() + """
-            color: $textColor;
+            font-weight: $fontWeight;
+            color: $color;
             font-family: "$fontFamily";
             font-size: $fontSize;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: $textOverflow;
         """.trimIndent()
         +text
     }
@@ -113,5 +109,17 @@ fun FlowContent.Button(modifier: Modifier, onClick: () -> String, content: BUTTO
         style = modifier.buildStyle()
         this.onClick = onClick()
         content()
+    }
+}
+
+fun FlowContent.InputTextField(value: String,fontWeight: String,fontSize: String, fontFamily: String,modifier: Modifier, properties: (INPUT) -> Unit = {}) {
+    textInput {
+        style = """
+            font-size: $fontSize;
+            font-family: $fontFamily;
+            font-weight: $fontWeight;
+        """.trimIndent()+ modifier.buildStyle()
+        this.value = value
+        properties(this)
     }
 }
