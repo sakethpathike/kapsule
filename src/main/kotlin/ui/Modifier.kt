@@ -8,12 +8,20 @@ class Modifier {
         finalStyle.append("background-color: $color; ")
     }
 
-    fun padding(px: Int) = this.also {
-        finalStyle.append("padding: ${px}px; ")
+    fun color(value: String) = this.also {
+        finalStyle.append("color: $value; ")
+    }
+
+    fun padding(value: String) = this.also {
+        finalStyle.append("padding: $value; ")
     }
 
     fun margin(px: Int) = this.also {
         finalStyle.append("margin: ${px}px; ")
+    }
+
+    fun margin(top: String, bottom: String, start: String, end: String) = this.also {
+        finalStyle.append("margin-top: $top; margin-bottom: $bottom; margin-inline-start: $start, margin-inline-end: $end; ")
     }
 
     fun border(radius: Int, color: String, width: Int = 1) = this.also {
@@ -125,6 +133,26 @@ class Modifier {
 
     fun minWidth(value: String) = this.also {
         finalStyle.append("min-width: $value; ")
+    }
+
+    fun zIndex(value: Int) = this.also {
+        finalStyle.append("z-index: $value; ")
+    }
+
+    fun boxSizing(value: String) = this.also {
+        finalStyle.append("box-sizing: $value; ")
+    }
+
+    fun cursor(value: String) = this.also {
+        finalStyle.append("cursor: $value; ")
+    }
+
+    fun transition(value: String) = this.also {
+        finalStyle.append("transition: $value; ")
+    }
+
+    fun transform(value: String)= this.also {
+        finalStyle.append("transform: $value; ")
     }
 
     fun buildStyle(): String = finalStyle.toString().trim()
