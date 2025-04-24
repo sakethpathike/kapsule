@@ -1,4 +1,4 @@
-package sakethh.ui
+package sakethh.kapsule.utils
 
 val Number.px: String get() = "${this}px"
 val Number.pt: String get() = "${this}pt"

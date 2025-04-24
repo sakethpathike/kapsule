@@ -1,6 +1,7 @@
-package sakethh.ui
+package sakethh.kapsule
 
 import kotlinx.html.*
+import sakethh.kapsule.utils.px
 
 fun HTML.Surface(
     modifier: Modifier,

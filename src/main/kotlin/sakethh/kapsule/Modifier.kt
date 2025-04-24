@@ -1,5 +1,4 @@
-package sakethh.ui
-
+package sakethh.kapsule
 
 class Modifier {
     private val finalStyle = StringBuilder()
