@@ -5,7 +5,11 @@ import kotlinx.html.*
 fun HTML.Surface(
     modifier: Modifier,
     /**List of font URLs*/
-    fonts: List<String> = emptyList(), content: BODY.() -> Unit = {}
+    fonts: List<String> = emptyList(),
+    style: STYLE.() -> Unit = {},
+    className: String? = null,
+    id: String? = null,
+    content: BODY.() -> Unit = {}
 ) {
     head {
         fonts.filter { font ->
@@ -13,15 +17,25 @@ fun HTML.Surface(
         }.forEach { font ->
             link(href = font, rel = "stylesheet")
         }
+
+        style {
+           style()
+        }
     }
-    body {
-        style = modifier.buildStyle()
+    body(classes = className) {
+        if (id != null) {
+            this.id = id
+        }
+        this.style = modifier.buildStyle()
         content()
     }
 }
 
-fun HTML.Surface(style: String, content: BODY.() -> Unit = {}) {
-    body {
+fun HTML.Surface(style: String, className: String? = null, id: String? = null, content: BODY.() -> Unit = {}) {
+    body(classes = className) {
+        if (id != null) {
+            this.id = id
+        }
         this.style = style
         content()
     }
@@ -30,10 +44,17 @@ fun HTML.Surface(style: String, content: BODY.() -> Unit = {}) {
 fun FlowContent.Text(
     text: String,
     fontSize: String = 12.px,
-    fontFamily: String, color: String, fontWeight: String,
+    fontFamily: String,
+    color: String,
+    fontWeight: String,
+    className: String? = null,
+    id: String? = null,
     modifier: Modifier = Modifier()
 ) {
-    div {
+    div(classes = className) {
+        if (id != null) {
+            this.id = id
+        }
         style = modifier.buildStyle() + """
             font-weight: $fontWeight;
             color: $color;
@@ -58,10 +79,13 @@ enum class HorizontalAlignment(val cssValue: String) {
 fun FlowContent.Column(
     modifier: Modifier = Modifier(),
     verticalAlignment: VerticalAlignment = VerticalAlignment.None,
-    horizontalAlignment: HorizontalAlignment = HorizontalAlignment.None,
+    horizontalAlignment: HorizontalAlignment = HorizontalAlignment.None, className: String? = null, id: String? = null,
     content: DIV.() -> Unit
 ) {
-    div {
+    div(classes = className) {
+        if (id != null) {
+            this.id = id
+        }
         style =
             "display: flex; flex-direction: column; ${if (verticalAlignment.cssValue.isNotBlank()) "justify-content: ${verticalAlignment.cssValue}; " else ""}; ${if (horizontalAlignment.cssValue.isNotBlank()) "align-items: ${horizontalAlignment.cssValue}; " else ""}" + modifier.buildStyle()
         content()
@@ -72,10 +96,13 @@ fun FlowContent.Column(
 fun FlowContent.Row(
     modifier: Modifier = Modifier(),
     verticalAlignment: VerticalAlignment = VerticalAlignment.None,
-    horizontalAlignment: HorizontalAlignment = HorizontalAlignment.None,
+    horizontalAlignment: HorizontalAlignment = HorizontalAlignment.None, className: String? = null, id: String? = null,
     content: DIV.() -> Unit
 ) {
-    div {
+    div(classes = className) {
+        if (id != null) {
+            this.id = id
+        }
         style = buildString {
             append("display: flex; ")
             append("flex-direction: row; ")
@@ -91,29 +118,56 @@ fun FlowContent.Row(
     }
 }
 
-fun FlowContent.Spacer(modifier: Modifier = Modifier()) {
-    div {
+fun FlowContent.Spacer(
+    className: String? = null, id: String? = null, modifier: Modifier = Modifier()
+) {
+    div(classes = className) {
+        if (id != null) {
+            this.id = id
+        }
         style = modifier.buildStyle()
     }
 }
 
-fun FlowContent.Box(modifier: Modifier, init: DIV.() -> Unit) {
-    div {
+fun FlowContent.Box(
+    modifier: Modifier, className: String? = null, id: String? = null, init: DIV.() -> Unit
+) {
+    div(classes = className) {
+        if (id != null) {
+            this.id = id
+        }
         style = modifier.buildStyle()
         init()
     }
 }
 
-fun FlowContent.Button(modifier: Modifier, onClick: () -> String, content: BUTTON.() -> Unit) {
-    button(type = ButtonType.button) {
+fun FlowContent.Button(
+    modifier: Modifier, className: String? = null, id: String? = null, onClick: () -> String, content: BUTTON.() -> Unit
+) {
+    button(classes = className, type = ButtonType.button) {
+        if (id != null) {
+            this.id = id
+        }
         style = modifier.buildStyle()
         this.onClick = onClick()
         content()
     }
 }
 
-fun FlowContent.InputTextField(value: String,fontWeight: String,fontSize: String, fontFamily: String,modifier: Modifier, properties: (INPUT) -> Unit = {}) {
-    textInput {
+fun FlowContent.TextInputField(
+    value: String,
+    className: String? = null,
+    id: String? = null,
+    fontWeight: String,
+    fontSize: String,
+    fontFamily: String,
+    modifier: Modifier,
+    properties: (INPUT) -> Unit = {}
+) {
+    textInput(classes = className) {
+        if (id != null) {
+            this.id = id
+        }
         style = """
             font-size: $fontSize;
             font-family: $fontFamily;
