@@ -67,12 +67,13 @@ fun FlowContent.Text(
         if (id != null) {
             this.id = id
         }
-        style = modifier.buildStyle() + """
-            font-weight: $fontWeight;
-            color: $color;
-            font-family: "$fontFamily";
-            font-size: $fontSize;
-        """.trimIndent()
+        style = buildString {
+            append("font-weight: $fontWeight; ")
+            append("color: $color; ")
+            append("font-family: \"$fontFamily\"; ")
+            append("font-size: $fontSize; ")
+            append(modifier.buildStyle())
+        }
         onThisElement()
         +text
     }
@@ -100,8 +101,17 @@ fun FlowContent.Column(
         if (id != null) {
             this.id = id
         }
-        style =
-            "display: flex; flex-direction: column; ${if (verticalAlignment.cssValue.isNotBlank()) "justify-content: ${verticalAlignment.cssValue}; " else ""}; ${if (horizontalAlignment.cssValue.isNotBlank()) "align-items: ${horizontalAlignment.cssValue}; " else ""}" + modifier.buildStyle()
+        style = buildString {
+            append("display: flex; ")
+            append("flex-direction: column; ")
+            if (verticalAlignment.cssValue.isNotBlank()) {
+                append("justify-content: ${verticalAlignment.cssValue}; ")
+            }
+            if (horizontalAlignment.cssValue.isNotBlank()) {
+                append("align-items: ${horizontalAlignment.cssValue}; ")
+            }
+            append(modifier.buildStyle())
+        }
         onThisElement()
         content()
     }
@@ -196,11 +206,12 @@ fun FlowContent.TextInputField(
         if (id != null) {
             this.id = id
         }
-        style = """
-            font-size: $fontSize;
-            font-family: $fontFamily;
-            font-weight: $fontWeight;
-        """.trimIndent()+ modifier.buildStyle()
+        style = buildString {
+            append("font-size: $fontSize; ")
+            append("font-family: $fontFamily; ")
+            append("font-weight: $fontWeight; ")
+            append(modifier.buildStyle())
+        }
         this.value = value
         onThisElement(this)
     }
