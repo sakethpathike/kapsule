@@ -15,3 +15,6 @@ val Number.ex: String get() = "${this}ex"
 val Number.lh: String get() = "${this}lh"
 val Number.percent: String get() = "${this}%"
 val Number.fr: String get() = "${this}fr"
+
+val Number.deg get() = Angle(this.toDouble(), "deg")
+val Number.rad get() = Angle(this.toDouble(), "rad")
