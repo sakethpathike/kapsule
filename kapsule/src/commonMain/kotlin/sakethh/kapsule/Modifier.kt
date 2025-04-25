@@ -7,71 +7,71 @@ import sakethh.kapsule.utils.TransformBuilder
 class Modifier {
     private val currentStyle = StringBuilder()
 
-    fun backgroundColor(color: String) = this.also {
+    fun backgroundColor(color: String) = apply {
         currentStyle.append("background-color: $color; ")
     }
 
-    fun color(value: String) = this.also {
+    fun color(value: String) = apply {
         currentStyle.append("color: $value; ")
     }
 
-    fun padding(value: String) = this.also {
+    fun padding(value: String) = apply {
         currentStyle.append("padding: $value; ")
     }
 
-    fun margin(px: Int) = this.also {
+    fun margin(px: Int) = apply {
         currentStyle.append("margin: ${px}px; ")
     }
 
-    fun margin(top: String, bottom: String, start: String, end: String) = this.also {
+    fun margin(top: String, bottom: String, start: String, end: String) = apply {
         currentStyle.append("margin-top: $top; margin-bottom: $bottom; margin-inline-start: $start, margin-inline-end: $end; ")
     }
 
-    fun border(radius: Int, color: String, width: Int = 1) = this.also {
+    fun border(radius: Int, color: String, width: Int = 1) = apply {
         currentStyle.append("border: ${width}px solid $color; border-radius: ${radius}px; ")
     }
 
-    fun border(radius: String, color: String, width: String) = this.also {
+    fun border(radius: String, color: String, width: String) = apply {
         currentStyle.append("border: $width solid $color; border-radius: $radius; ")
     }
 
-    fun width(value: String) = this.also {
+    fun width(value: String) = apply {
         currentStyle.append("width: $value; ")
     }
 
-    fun height(value: String) = this.also {
+    fun height(value: String) = apply {
         currentStyle.append("height: $value; ")
     }
 
-    fun display(value: String) = this.also {
+    fun display(value: String) = apply {
         currentStyle.append("display: $value; ")
     }
 
-    fun opacity(value: Double) = this.also {
+    fun opacity(value: Double) = apply {
         currentStyle.append("opacity: $value; ")
     }
 
-    fun custom(properties: String) = this.also {
+    fun custom(properties: String) = apply {
         currentStyle.append("$properties ")
     }
 
-    fun position(position: String) = this.also {
+    fun position(position: String) = apply {
         currentStyle.append("position: $position; ")
     }
 
-    fun justifyContent(value: String) = this.also {
+    fun justifyContent(value: String) = apply {
         currentStyle.append("justify-content: $value; ")
     }
 
-    fun flexDirection(value: String) = this.also {
+    fun flexDirection(value: String) = apply {
         currentStyle.append("flex-direction: $value;")
     }
 
-    fun gap(px: Int) = this.also {
+    fun gap(px: Int) = apply {
         currentStyle.append("gap: ${px}px;")
     }
 
-    fun flexGrow(value: Int) = this.also {
+    fun flexGrow(value: Int) = apply {
         currentStyle.append("flex-grow: $value;")
     }
 
@@ -79,7 +79,7 @@ class Modifier {
     Sets width to 100% of the parent.
     - Use this only when the parent has a defined width.
      */
-    fun fillMaxWidth(fraction: Double = 1.0) = this.also {
+    fun fillMaxWidth(fraction: Double = 1.0) = apply {
         require(fraction in 0.0..1.0) { "Fraction must be between 0 and 1" }
         currentStyle.append("width: ${fraction * 100}%; ")
     }
@@ -88,7 +88,7 @@ class Modifier {
     Sets height to 100% of the parent.
     - Use this only when the parent has a defined height.
      */
-    fun fillMaxHeight(fraction: Double = 1.0) = this.also {
+    fun fillMaxHeight(fraction: Double = 1.0) = apply {
         require(fraction in 0.0..1.0) { "Fraction must be between 0 and 1" }
         currentStyle.append("height: ${fraction * 100}%; ")
     }
@@ -98,20 +98,20 @@ class Modifier {
     - Use this only when the parent has a defined height and width.
     - Use [fillViewportSize] when you want to fill the full screen.
      * */
-    fun fillMaxSize(fraction: Double = 1.0) = this.also {
+    fun fillMaxSize(fraction: Double = 1.0) = apply {
         fillMaxWidth(fraction)
         fillMaxHeight(fraction)
     }
 
-    fun matchParentWidth() = this.also {
+    fun matchParentWidth() = apply {
         currentStyle.append("width: 100%; ")
     }
 
-    fun matchParentHeight() = this.also {
+    fun matchParentHeight() = apply {
         currentStyle.append("height: 100%; ")
     }
 
-    fun matchParentSize() = this.also {
+    fun matchParentSize() = apply {
         matchParentWidth()
         matchParentHeight()
     }
@@ -126,35 +126,35 @@ class Modifier {
     /**
     Use `fillViewportSize()` when you want an element to fill the full screen.
      */
-    fun fillViewportSize() = this.also {
+    fun fillViewportSize() = apply {
         currentStyle.append("width: 100vw; height: 100vh; ")
     }
 
-    fun minHeight(value: String) = this.also {
+    fun minHeight(value: String) = apply {
         currentStyle.append("min-height: $value; ")
     }
 
-    fun minWidth(value: String) = this.also {
+    fun minWidth(value: String) = apply {
         currentStyle.append("min-width: $value; ")
     }
 
-    fun zIndex(value: Int) = this.also {
+    fun zIndex(value: Int) = apply {
         currentStyle.append("z-index: $value; ")
     }
 
-    fun boxSizing(value: String) = this.also {
+    fun boxSizing(value: String) = apply {
         currentStyle.append("box-sizing: $value; ")
     }
 
-    fun cursor(value: String) = this.also {
+    fun cursor(value: String) = apply {
         currentStyle.append("cursor: $value; ")
     }
 
-    fun transition(value: String) = this.also {
+    fun transition(value: String) = apply {
         currentStyle.append("transition: $value; ")
     }
 
-    fun transform(transformBuilder: TransformBuilder) = this.also {
+    fun transform(transformBuilder: TransformBuilder) = apply {
         require(transformBuilder.buildTransformation().trim().isNotBlank()) {
             "Invalid transformation. Apply valid transformations.\nNote: `.transform(TransformBuilder())` is not valid. Please apply actual transformations using methods provided by the TransformBuilder."
         }
@@ -171,7 +171,7 @@ class Modifier {
         }")
     }
 
-    fun clip(shape: Shape, overflow: Overflow = Overflow.Hidden) = this.also {
+    fun clip(shape: Shape, overflow: Overflow = Overflow.Hidden) = apply {
         require(shape.buildPath().isNotBlank() && overflow.value.isNotBlank()) {
             "Both shape path and overflow value must be provided and cannot be empty."
         }
