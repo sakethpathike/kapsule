@@ -1,12 +1,10 @@
 package sakethh.kapsule.utils
 
 
-fun String.ensureSemicolon() {
-    return run {
-        if (this.trim().endsWith(";")) {
+fun String.ensureSemicolon(): String {
+    return if (this.trim().endsWith(";")) {
             this
         } else {
             "$this; "
         }
-    }
 }
