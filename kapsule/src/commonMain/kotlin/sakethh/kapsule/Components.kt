@@ -1,6 +1,8 @@
 package sakethh.kapsule
 
 import kotlinx.html.*
+import sakethh.kapsule.utils.HorizontalAlignment
+import sakethh.kapsule.utils.VerticalAlignment
 import sakethh.kapsule.utils.px
 
 fun HTML.Surface(
@@ -80,17 +82,6 @@ fun FlowContent.Text(
     }
 }
 
-enum class VerticalAlignment(val cssValue: String) {
-    Top("flex-start"), Center("center"), Bottom("flex-end"), SpaceBetween("space-between"), SpaceAround("space-around"), SpaceEvenly(
-        "space-evenly"
-    ),
-    None("")
-}
-
-enum class HorizontalAlignment(val cssValue: String) {
-    Start("flex-start"), Center("center"), End("flex-end"), Stretch("stretch"), None("")
-}
-
 fun FlowContent.Column(
     modifier: Modifier = Modifier(),
     verticalAlignment: VerticalAlignment = VerticalAlignment.None,
@@ -105,11 +96,11 @@ fun FlowContent.Column(
         style = buildString {
             append("display: flex; ")
             append("flex-direction: column; ")
-            if (verticalAlignment.cssValue.isNotBlank()) {
-                append("justify-content: ${verticalAlignment.cssValue}; ")
+            if (verticalAlignment.value.isNotBlank()) {
+                append("justify-content: ${verticalAlignment.value}; ")
             }
-            if (horizontalAlignment.cssValue.isNotBlank()) {
-                append("align-items: ${horizontalAlignment.cssValue}; ")
+            if (horizontalAlignment.value.isNotBlank()) {
+                append("align-items: ${horizontalAlignment.value}; ")
             }
             append(modifier.buildStyle())
         }
@@ -133,11 +124,11 @@ fun FlowContent.Row(
         style = buildString {
             append("display: flex; ")
             append("flex-direction: row; ")
-            if (verticalAlignment.cssValue.isNotBlank()) {
-                append("justify-content: ${verticalAlignment.cssValue}; ")
+            if (verticalAlignment.value.isNotBlank()) {
+                append("justify-content: ${verticalAlignment.value}; ")
             }
-            if (horizontalAlignment.cssValue.isNotBlank()) {
-                append("align-items: ${horizontalAlignment.cssValue}; ")
+            if (horizontalAlignment.value.isNotBlank()) {
+                append("align-items: ${horizontalAlignment.value}; ")
             }
             append(modifier.buildStyle())
         }

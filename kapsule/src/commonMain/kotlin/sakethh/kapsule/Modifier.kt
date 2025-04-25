@@ -1,5 +1,8 @@
 package sakethh.kapsule
 
+import sakethh.kapsule.utils.Overflow
+import sakethh.kapsule.utils.Shape
+
 class Modifier {
     private val finalStyle = StringBuilder()
 
@@ -152,6 +155,10 @@ class Modifier {
 
     fun transform(value: String)= this.also {
         finalStyle.append("transform: $value; ")
+    }
+
+    fun clip(shape: Shape, overflow: Overflow = Overflow.Hidden) = this.also {
+        finalStyle.append("clip-path: ${shape.buildPath()} overflow: ${overflow.value}; ")
     }
 
     fun buildStyle(): String = finalStyle.toString().trim()
