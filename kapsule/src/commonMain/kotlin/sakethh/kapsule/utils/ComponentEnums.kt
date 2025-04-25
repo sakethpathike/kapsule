@@ -10,7 +10,3 @@ enum class VerticalAlignment(val value: String) {
 enum class HorizontalAlignment(val value: String) {
     Start("flex-start"), Center("center"), End("flex-end"), Stretch("stretch"), None("")
 }
-
-enum class Overflow(val value: String) {
-    Hidden("hidden"), Visible("visible"), Scroll("scroll"), Auto("auto"), Clip("clip")
-}
