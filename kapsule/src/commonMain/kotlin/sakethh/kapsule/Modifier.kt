@@ -1,8 +1,6 @@
 package sakethh.kapsule
 
-import sakethh.kapsule.utils.Overflow
-import sakethh.kapsule.utils.Shape
-import sakethh.kapsule.utils.TransformBuilder
+import sakethh.kapsule.utils.*
 
 class Modifier {
     private val currentStyle = StringBuilder()
@@ -150,24 +148,22 @@ class Modifier {
         currentStyle.append("cursor: $value; ")
     }
 
-    fun transition(value: String) = apply {
-        currentStyle.append("transition: $value; ")
+    fun transition(transitionBuilder: TransitionBuilder) = apply {
+        require(transitionBuilder.buildTransition().trim().isNotBlank()){
+            "Invalid transition. Apply valid transitions.\nNote: `.transition(TransitionBuilder())` is not valid. Please apply actual transitions using functions provided by the TransitionBuilder."
+        }
+
+        currentStyle.append("transition: ${transitionBuilder.buildTransition().ensureSemicolon()}; ")
     }
 
     fun transform(transformBuilder: TransformBuilder) = apply {
         require(transformBuilder.buildTransformation().trim().isNotBlank()) {
-            "Invalid transformation. Apply valid transformations.\nNote: `.transform(TransformBuilder())` is not valid. Please apply actual transformations using methods provided by the TransformBuilder."
+            "Invalid transformation. Apply valid transformations.\nNote: `.transform(TransformBuilder())` is not valid. Please apply actual transformations using functions provided by the TransformBuilder."
         }
 
         currentStyle.append(
             "transform: ${
-            transformBuilder.buildTransformation().run {
-                if (this.endsWith(";")) {
-                    this
-                } else {
-                    "$this; "
-                }
-            }
+            transformBuilder.buildTransformation().ensureSemicolon()
         }")
     }
 
@@ -178,13 +174,7 @@ class Modifier {
 
         currentStyle.append(
             "clip-path: ${
-            shape.buildPath().run {
-                if (this.trim().endsWith(";")) {
-                    this
-                } else {
-                    "$this; "
-                }
-            }
+                shape.buildPath().ensureSemicolon()
         } overflow: ${overflow.value}; ")
     }
 
