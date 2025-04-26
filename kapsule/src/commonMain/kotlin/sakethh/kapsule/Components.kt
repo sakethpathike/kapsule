@@ -1,10 +1,7 @@
 package sakethh.kapsule
 
 import kotlinx.html.*
-import sakethh.kapsule.utils.Display
-import sakethh.kapsule.utils.HorizontalAlignment
-import sakethh.kapsule.utils.VerticalAlignment
-import sakethh.kapsule.utils.px
+import sakethh.kapsule.utils.*
 
 fun HTML.Surface(
     modifier: Modifier,
@@ -65,8 +62,8 @@ fun FlowContent.Text(
     display: Display? = Display.Inline,
     className: String? = null,
     id: String? = null,
+    textAlign: TextAlign = TextAlign.Start,
     onThisElement: DIV.() -> Unit = {},
-    useSpan: Boolean = false,
     modifier: Modifier = Modifier()
 ) {
     div(classes = className) {
@@ -78,8 +75,9 @@ fun FlowContent.Text(
             append("color: $color; ")
             append("font-family: \"$fontFamily\"; ")
             append("font-size: $fontSize; ")
+            append("text-align: ${textAlign.cssValue}; ")
             if (display != null) {
-                append("display: ${display.cssValue}")
+                append("display: ${display.cssValue}; ")
             }
             append(modifier.buildStyle())
         }
