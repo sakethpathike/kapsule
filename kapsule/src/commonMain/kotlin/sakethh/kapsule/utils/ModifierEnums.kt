@@ -82,3 +82,41 @@ enum class Position(val cssValue: String) {
 
     override fun toString(): String = cssValue
 }
+
+    enum class Display(val cssValue: String) {
+        // Precomposed values
+        Block("block"),
+        Inline("inline"),
+        InlineBlock("inline-block"),
+        Flex("flex"),
+        InlineFlex("inline-flex"),
+        Grid("grid"),
+        InlineGrid("inline-grid"),
+        FlowRoot("flow-root"),
+
+        // Box generation
+        None("none"),
+        Contents("contents"),
+
+        // Multi-keyword syntax
+        BlockFlex("block flex"),
+        BlockFlow("block flow"),
+        BlockFlowRoot("block flow-root"),
+        BlockGrid("block grid"),
+        InlineFlexMulti("inline flex"),
+        InlineFlow("inline flow"),
+        InlineFlowRoot("inline flow-root"),
+        InlineGridMulti("inline grid"),
+
+        // Other values
+        Table("table"),
+        TableRow("table-row"),
+        ListItem("list-item"),
+
+        // Global values
+        Inherit("inherit"),
+        Initial("initial"),
+        Revert("revert"),
+        RevertLayer("revert-layer"),
+        Unset("unset")
+    }

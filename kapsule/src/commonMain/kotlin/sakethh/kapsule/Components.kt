@@ -1,6 +1,7 @@
 package sakethh.kapsule
 
 import kotlinx.html.*
+import sakethh.kapsule.utils.Display
 import sakethh.kapsule.utils.HorizontalAlignment
 import sakethh.kapsule.utils.VerticalAlignment
 import sakethh.kapsule.utils.px
@@ -61,11 +62,14 @@ fun FlowContent.Text(
     fontFamily: String,
     color: String,
     fontWeight: String,
+    display: Display? = Display.Inline,
     className: String? = null,
-    id: String? = null, onThisElement: SPAN.() -> Unit = {},
+    id: String? = null,
+    onThisElement: DIV.() -> Unit = {},
+    useSpan: Boolean = false,
     modifier: Modifier = Modifier()
 ) {
-    span(classes = className) {
+    div(classes = className) {
         if (id != null) {
             this.id = id
         }
@@ -74,6 +78,9 @@ fun FlowContent.Text(
             append("color: $color; ")
             append("font-family: \"$fontFamily\"; ")
             append("font-size: $fontSize; ")
+            if (display != null) {
+                append("display: ${display.cssValue}")
+            }
             append(modifier.buildStyle())
         }
         onThisElement()

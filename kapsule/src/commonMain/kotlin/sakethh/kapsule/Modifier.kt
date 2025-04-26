@@ -63,7 +63,7 @@ class Modifier {
      * in a document and how it interacts with the normal flow of the page.
      *
      * @param position Defines the positioning scheme used for the element.
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">MDN Docs: position</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">MDN Documentation for position</a>
      */
     fun position(position: Position) = apply {
         appendNewStyle(property = "position", value = position.cssValue)
@@ -74,15 +74,15 @@ class Modifier {
      * Sets CSS `flex-grow` using predefined [FlexGrow] keyword values.
      *
      * These values modify inheritance/reset behavior:
-     * - [FlexGrow.Inherit] - Inherits parent's `flex-grow` ([MDN Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inherit))
-     * - [FlexGrow.Initial] - Resets to default (`0`) ([MDN Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/initial))
-     * - [FlexGrow.Revert] - Reverts to browser stylesheet ([MDN Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/revert))
-     * - [FlexGrow.Unset] - Auto-inherits/resets ([MDN Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/unset))
+     * - [FlexGrow.Inherit] - Inherits parent's `flex-grow` ([MDN Documentation for Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/inherit))
+     * - [FlexGrow.Initial] - Resets to default (`0`) ([MDN Documentation for Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/initial))
+     * - [FlexGrow.Revert] - Reverts to browser stylesheet ([MDN Documentation for Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/revert))
+     * - [FlexGrow.Unset] - Auto-inherits/resets ([MDN Documentation for Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/unset))
      *
      * ### When to Use:
      * For resetting/inheriting values rather than proportional growth.
      *
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow">MDN flex-grow</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow">MDN Documentation for flex-grow</a>
      */
     fun flexGrow(flexGrow: FlexGrow) = apply {
         appendNewStyle("flex-grow", flexGrow.cssValue)
@@ -101,7 +101,7 @@ class Modifier {
      * - Relative to other items' `flex-grow` values
      *
      * @param value Non-negative growth factor (typically 0, 1, or 2)
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow">MDN flex-grow</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow">MDN Documentation for flex-grow</a>
      */
     fun flexGrow(value: Float) = apply {
         require(value >= 0) { "flex-grow must be ≥ 0 (was $value)" }
@@ -190,7 +190,7 @@ class Modifier {
      * @param value Stacking order (higher = visually closer).
      *             Typical range: -1 to 100 (extreme values work but are discouraged).
      *
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/z-index">MDN z-index</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/z-index">MDN Documentation for z-index</a>
      */
     fun zIndex(value: Int) = apply {
         appendNewStyle(property = "z-index", value)
@@ -220,7 +220,7 @@ class Modifier {
      * .boxSizing(BoxSizing.ContentBox)
      * ```
      *
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing">MDN Reference</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing">MDN Documentation for box-sizing</a>
      */
     fun boxSizing(boxSizing: BoxSizing) = apply {
         appendNewStyle(property = "box-sizing", value = boxSizing.cssValue)
@@ -242,7 +242,7 @@ class Modifier {
      * @throws IllegalArgumentException if blank
      *
      * @see BoxSizing For standard (`content-box`/`border-box`) options
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing">MDN box-sizing</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing">MDN Documentation for box-sizing</a>
      */
     fun boxSizing(value: String) = apply {
         require(value.isNotBlank()) { "Box-sizing value cannot be blank. Please provide a valid value (e.g., 'content-box' or 'border-box')." }
@@ -277,7 +277,7 @@ class Modifier {
      * // For draggable items
      * .cursor(Cursor.Grab)
      * ```
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/cursor">MDN cursor</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/cursor">MDN Documentation for cursor</a>
      */
     fun cursor(cursor: Cursor) = apply {
         appendNewStyle(property = "cursor", value = cursor.cssValue)
@@ -311,7 +311,7 @@ class Modifier {
      * - Always provide fallbacks: `"url(...), default"`
      *
      * @see [Cursor] For standard, type-safe cursor options
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/cursor">MDN cursor</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/cursor">MDN Documentation for cursor</a>
      */
     fun cursor(value: String) = apply {
         require(value.isNotBlank()) {
@@ -422,6 +422,20 @@ class Modifier {
         }
         appendNewStyle(property = "clip-path", value = shape.buildPath().ensureSemicolon())
         appendNewStyle(property = "overflow", value = overflow.cssValue)
+    }
+    
+    /**
+     * Applies the CSS `display` property to the current element.
+     *
+     * The [Display] enum provides a type-safe way to specify common display values
+     * without needing to manually write CSS strings.
+     *
+     * @param display The [Display] value representing the desired CSS display behavior.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">MDN Documentation for display</a>
+     */
+    fun display(display: Display) = apply {
+        appendNewStyle(property = "display", value = display.cssValue)
     }
 
     fun buildStyle(): String = currentStyle.toString().trim()
