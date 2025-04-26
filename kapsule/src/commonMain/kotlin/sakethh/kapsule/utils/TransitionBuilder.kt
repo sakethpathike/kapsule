@@ -8,7 +8,7 @@ class TransitionBuilder {
     }
 
     fun timingFunction(value: TimingFunction) = apply {
-        currentTransition.append("${value.value} ")
+        currentTransition.append("${value.cssValue} ")
     }
 
     fun delay(value: Float, unit: String = "s") = apply {
