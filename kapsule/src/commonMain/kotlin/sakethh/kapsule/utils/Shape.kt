@@ -35,15 +35,24 @@ sealed interface Shape {
     companion object {
         val Circle = Custom("circle()")
         val Rectangle = Custom("rect(0, 0, 100%, 100%)")
-        val RoundedRectangle = Custom("rect(0, 0, 100%, 100%, 20px)")
+        val RoundedRectangle = Custom("clip-path: inset(0 round 20px);")
         val Ellipse = Custom("ellipse()")
     }
 
     data class RoundedRectangle(
-        val x: Float, val y: Float, val width: Float, val height: Float, val cornerRadius: String
+        val top: Float, val right: Float, val bottom: Float, val left: Float, val cornerRadius: String
     ) : Shape {
+
+        constructor(cornerRadius: String) : this(
+            top = 0f,
+            right = 0f,
+            bottom = 0f,
+            left = 0f,
+            cornerRadius = cornerRadius
+        )
+
         override fun buildPath(): String {
-            return "rect($x, $y, $height, $width, $cornerRadius)"
+            return "inset($top $right $bottom $left round $cornerRadius)"
         }
     }
 }
