@@ -62,11 +62,10 @@ fun FlowContent.Text(
     color: String,
     fontWeight: String,
     className: String? = null,
-    id: String? = null,
-    onThisElement: DIV.() -> Unit = {},
+    id: String? = null, onThisElement: SPAN.() -> Unit = {},
     modifier: Modifier = Modifier()
 ) {
-    div(classes = className) {
+    span(classes = className) {
         if (id != null) {
             this.id = id
         }
