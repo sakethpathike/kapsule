@@ -5,7 +5,7 @@ import sakethh.kapsule.utils.*
 class Modifier {
     private val currentStyle = StringBuilder()
 
-    internal fun appendNewStyle(property: String, value: Any) = apply {
+    private fun appendNewStyle(property: String, value: Any) = apply {
         currentStyle.append("$property: $value; ")
     }
 
