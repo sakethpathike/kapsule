@@ -49,6 +49,10 @@ class Modifier {
         currentStyle.append("opacity: $value; ")
     }
 
+    fun size(value: String) = apply {
+        height(value)
+        width(value)
+    }
     /**
      * Appends raw CSS properties directly to the current modifier chain.
      *

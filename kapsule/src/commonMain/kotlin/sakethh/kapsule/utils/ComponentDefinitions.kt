@@ -21,3 +21,34 @@ enum class TextAlign(val cssValue: String) {
     // Global values
     Inherit("inherit"), Initial("initial"), Revert("revert"), RevertLayer("revert-layer"), Unset("unset")
 }
+
+enum class ContentScale(val cssValue: String) {
+    Contain("contain"), Cover("cover"), Fill("fill"), None("none"), ScaleDown("scale-down");
+}
+
+sealed interface ObjectPosition {
+    fun position(): String
+
+    enum class Predefined : ObjectPosition {
+        Top {
+            override fun position() = "top"
+        },
+        Bottom {
+            override fun position() = "bottom"
+        },
+        Left {
+            override fun position() = "left"
+        },
+        Right {
+            override fun position() = "right"
+        },
+        Center {
+            override fun position() = "center"
+        }
+    }
+
+    data class Custom(val value: String) : ObjectPosition {
+        override fun position() = value
+    }
+}
+

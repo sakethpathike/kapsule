@@ -242,3 +242,27 @@ fun FlowContent.Heading(
         onThisElement()
     }
 }
+
+fun FlowContent.Image(
+    modifier: Modifier = Modifier(),
+    alt: String? = null,
+    src: String,
+    id: String? = null,
+    imgLoading: ImgLoading? = null,
+    className: String? = null,
+    contentScale: ContentScale = ContentScale.Cover,
+    alignment: ObjectPosition = ObjectPosition.Predefined.Center,
+    onThisElement: IMG.() -> Unit = {}
+) {
+    img(alt = alt, src = src, loading = imgLoading, classes = className) {
+        style = buildString {
+            append("object-position: ${alignment.position()}; ")
+            append("object-fit: ${contentScale.cssValue}; ")
+            append(modifier.buildStyle())
+        }
+        id?.let {
+            this.id = it
+        }
+        onThisElement()
+    }
+}
