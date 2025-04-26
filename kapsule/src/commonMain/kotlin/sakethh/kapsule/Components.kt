@@ -266,3 +266,26 @@ fun FlowContent.Image(
         onThisElement()
     }
 }
+
+fun FlowContent.StaggeredGrid(
+    modifier: Modifier = Modifier(),
+    columnCount: Int,
+    columnGap: String = 16.px,
+    className: String? = null,
+    id: String? = null,
+    onThisElement: DIV.() -> Unit = {},
+    content: DIV.() -> Unit
+) {
+    div(classes = className) {
+        if (id != null) {
+            this.id = id
+        }
+        style = buildString {
+            append("column-count: $columnCount; ")
+            append("column-gap: $columnGap; ")
+            append(modifier.buildStyle())
+        }
+        onThisElement()
+        content()
+    }
+}
