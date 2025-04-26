@@ -208,3 +208,33 @@ fun FlowContent.TextInputField(
         onThisElement()
     }
 }
+
+fun FlowContent.BreakFlow(onThisElement: BR.() -> Unit = {}, className: String? = null, id: String? = null) {
+    br(classes = className) {
+        if (id != null) {
+            this.id = id
+        }
+        onThisElement()
+    }
+}
+
+private val headingBuilders: List<FlowContent.(className: String?, block: FlowOrHeadingContent.() -> Unit) -> Unit> =
+    listOf(
+        FlowContent::h1, FlowContent::h2, FlowContent::h3, FlowContent::h4, FlowContent::h5, FlowContent::h6
+    )
+
+fun FlowContent.Heading(
+    level: Int,
+    text: String,
+    className: String? = null,
+    id: String? = null,
+    onThisElement: FlowOrHeadingContent.() -> Unit = {}
+) {
+    require(level in 1..6) { "Invalid heading level: $level" }
+
+    headingBuilders[level - 1].invoke(this, className) {
+        id?.let { attributes["id"] = it }
+        +text
+        onThisElement()
+    }
+}
