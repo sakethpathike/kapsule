@@ -35,7 +35,7 @@ sealed interface Shape {
     companion object {
         val Circle = Custom("circle()")
         val Rectangle = Custom("rect(0, 0, 100%, 100%)")
-        val RoundedRectangle = Custom("clip-path: inset(0 round 20px);")
+        val RoundedRectangle = Custom("clip-path: inset(0 round 20px)")
         val Ellipse = Custom("ellipse()")
     }
 
