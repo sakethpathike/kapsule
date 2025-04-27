@@ -10,23 +10,33 @@ class Modifier {
     }
 
     fun backgroundColor(color: String) = apply {
-        currentStyle.append("background-color: $color; ")
+        appendNewStyle(property = "background-color", value = color)
     }
 
     fun color(value: String) = apply {
-        currentStyle.append("color: $value; ")
+        appendNewStyle(property = "color", value)
     }
 
     fun padding(value: String) = apply {
-        currentStyle.append("padding: $value; ")
+        appendNewStyle(property = "padding", value)
+    }
+
+    fun padding(top: String, bottom: String, start: String, end: String) = apply {
+        appendNewStyle(property = "padding-top", value = top)
+        appendNewStyle(property = "padding-end", value = end)
+        appendNewStyle(property = "padding-start", value = start)
+        appendNewStyle(property = "padding-bottom", value = bottom)
     }
 
     fun margin(px: Int) = apply {
-        currentStyle.append("margin: ${px}px; ")
+        appendNewStyle(property = "margin", value = px.px)
     }
 
     fun margin(top: String, bottom: String, start: String, end: String) = apply {
-        currentStyle.append("margin-top: $top; margin-bottom: $bottom; margin-inline-start: $start, margin-inline-end: $end; ")
+        appendNewStyle(property = "margin-top", value = top)
+        appendNewStyle(property = "margin-bottom", value = bottom)
+        appendNewStyle(property = "margin-inline-start", value = start)
+        appendNewStyle(property = "margin-inline-end", value = end)
     }
 
     fun border(radius: Int, color: String, width: Int = 1) = apply {
@@ -59,7 +69,7 @@ class Modifier {
      * Useful for adding custom styles that are not yet covered by predefined functions.
      * */
     fun custom(properties: String) = apply {
-        currentStyle.append("$properties ")
+        currentStyle.append("$properties ".ensureSemicolon())
     }
 
     /**
