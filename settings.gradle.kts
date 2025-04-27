@@ -28,5 +28,4 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-includeBuild("convention-plugins")
 include(":kapsule")

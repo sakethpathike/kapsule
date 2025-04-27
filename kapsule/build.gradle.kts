@@ -1,7 +1,9 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.android.library)
-    id("convention.publication")
+    id("com.vanniktech.maven.publish") version "0.31.0"
 }
 
 group = "sakethh.kapsule"
@@ -53,5 +55,39 @@ android {
 
     defaultConfig {
         minSdk = 21
+    }
+}
+
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+
+    signAllPublications()
+
+    coordinates(group.toString(), "kapsule", version.toString())
+
+    pom {
+        name = "kapsule"
+        description = " kapsule is a Kotlin Multiplatform library, wrapping kotlinx.html with Jetpack Compose-style modifiers and layout semantics to simplify static HTML generation."
+        inceptionYear = "2025"
+        url = "https://github.com/sakethpathike/kapsule"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        developers {
+            developer {
+                id = "sakethpathike"
+                name = "Saketh Pathike"
+                url = "https://github.com/sakethpathike/"
+            }
+        }
+        scm {
+            url = "https://github.com/sakethpathike/kapsule/"
+            connection = "scm:git:git://github.com/sakethpathike/kapsule.git"
+            developerConnection = "scm:git:ssh://git@github.com/sakethpathike/kapsule.git"
+        }
     }
 }
