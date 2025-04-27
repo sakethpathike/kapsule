@@ -27,14 +27,14 @@ kotlin {
     sourceSets {
         val kotlinxHtmlVersion = "0.12.0"
         commonMain.dependencies {
-            implementation("org.jetbrains.kotlinx:kotlinx-html:$kotlinxHtmlVersion")
+            api("org.jetbrains.kotlinx:kotlinx-html:$kotlinxHtmlVersion")
         }
         jvmMain.dependencies {
-            implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
+            api("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
         }
 
         jsMain.dependencies {
-            implementation("org.jetbrains.kotlinx:kotlinx-html-js:$kotlinxHtmlVersion")
+            api("org.jetbrains.kotlinx:kotlinx-html-js:$kotlinxHtmlVersion")
         }
     }
 
