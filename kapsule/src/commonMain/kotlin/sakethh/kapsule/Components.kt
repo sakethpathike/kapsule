@@ -4,7 +4,7 @@ import kotlinx.html.*
 import sakethh.kapsule.utils.*
 
 fun HTML.Surface(
-    modifier: Modifier,
+    modifier: Modifier = Modifier(),
     /**List of font URLs*/
     fonts: List<String> = emptyList(),
     style: STYLE.() -> Unit = {},
