@@ -6,7 +6,7 @@ plugins {
     id("com.vanniktech.maven.publish") version "0.31.0"
 }
 
-group = "sakethh.kapsule"
+group = "io.github.sakethh"
 version = "0.0.1"
 
 kotlin {
@@ -50,7 +50,7 @@ kotlin {
 }
 
 android {
-    namespace = "sakethh.kapsule"
+    namespace = "io.github.sakethpathike.kapsule"
     compileSdk = 35
 
     defaultConfig {
