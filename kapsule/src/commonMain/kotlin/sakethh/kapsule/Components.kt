@@ -55,10 +55,7 @@ fun HTML.Surface(
 
 fun FlowContent.Text(
     text: String,
-    fontSize: String = 12.px,
-    fontFamily: String,
-    color: String,
-    fontWeight: String,
+    fontSize: String = 12.px, fontFamily: String? = null, color: String? = null, fontWeight: String? = null,
     display: Display? = Display.Inline,
     className: String? = null,
     id: String? = null,
@@ -71,9 +68,18 @@ fun FlowContent.Text(
             this.id = id
         }
         style = buildString {
-            append("font-weight: $fontWeight; ")
-            append("color: $color; ")
-            append("font-family: \"$fontFamily\"; ")
+
+            if (fontWeight != null) {
+                append("font-weight: $fontWeight; ")
+            }
+
+            if (color != null) {
+                append("color: $color; ")
+            }
+
+            if (fontFamily != null) {
+                append("font-family: \"$fontFamily\"; ")
+            }
             append("font-size: $fontSize; ")
             append("text-align: ${textAlign.cssValue}; ")
             if (display != null) {
