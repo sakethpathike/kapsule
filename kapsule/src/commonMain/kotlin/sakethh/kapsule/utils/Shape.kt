@@ -40,7 +40,7 @@ sealed interface Shape {
     }
 
     data class RoundedRectangle(
-        val top: Float, val right: Float, val bottom: Float, val left: Float, val cornerRadius: String
+        val top: Float = 0f, val right: Float = 0f, val bottom: Float = 0f, val left: Float = 0f, val cornerRadius: String
     ) : Shape {
 
         constructor(cornerRadius: String) : this(

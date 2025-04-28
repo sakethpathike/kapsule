@@ -21,7 +21,7 @@ class Modifier {
         appendNewStyle(property = "padding", value)
     }
 
-    fun padding(top: String, bottom: String, start: String, end: String) = apply {
+    fun padding(top: String = 0.px, bottom: String = 0.px, start: String = 0.px, end: String = 0.px) = apply {
         appendNewStyle(property = "padding-top", value = top)
         appendNewStyle(property = "padding-end", value = end)
         appendNewStyle(property = "padding-start", value = start)
@@ -32,7 +32,7 @@ class Modifier {
         appendNewStyle(property = "margin", value = px.px)
     }
 
-    fun margin(top: String, bottom: String, start: String, end: String) = apply {
+    fun margin(top: String = 0.px, bottom: String = 0.px, start: String = 0.px, end: String = 0.px) = apply {
         appendNewStyle(property = "margin-top", value = top)
         appendNewStyle(property = "margin-bottom", value = bottom)
         appendNewStyle(property = "margin-inline-start", value = start)
