@@ -156,7 +156,7 @@ fun FlowContent.Spacer(
         if (id != null) {
             this.id = id
         }
-        style = modifier.then(Modifier().display(Display.InlineBlock)).buildStyle()
+        style = modifier.buildStyle()
         onThisElement()
     }
 }
