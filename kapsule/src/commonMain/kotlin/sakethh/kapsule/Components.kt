@@ -88,7 +88,9 @@ fun FlowContent.Text(
             append(modifier.buildStyle())
         }
         onThisElement()
-        +text
+        unsafe {
+            raw(text.replace("\n", "<br>"))
+        }
     }
 }
 
