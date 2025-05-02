@@ -1,28 +1,33 @@
-Jetpack Compose's declarative approach with Kotlin DSL is one of my best experiences writing Compose/Kotlin code.
+**kapsule** is a Kotlin Multiplatform library
+that wraps `kotlinx.html` with Jetpack Compose-style modifiers and layout semantics,
+making static HTML generation simpler and more expressive.
+Chain Modifier calls for CSS, compose layouts like in Compose,
+and avoid unnecessary overhead—just clean, structured HTML.
 
-Well, that wasn't quite the case when dealing with HTML thrown from a server for simple static sites. `kotlinx.html` solves this, but since I'm more familiar with Compose, I thought there should be a library that just does this. There are solutions like Kobweb and Kweb, but they're quite heavy/full-stack-based, rather than *just* HTML generation.
+## Documentation
 
-ANDDDD... I have a plan.
+[Documentation (built with kapsule) →](https://related-xaviera-sakethpathike-cd849e75.koyeb.app/)  
+_What you see is what kapsule can do._
+> Docs are a work-in-progress. But if you're familiar with Jetpack Compose, kapsule will feel instantly familiar.
+> I’ve included comments in the code for most modifiers, so your IDE's doc preview should help you out.
 
-![](https://github.com/user-attachments/assets/1dadec04-f358-48b7-a241-56f196b82929)
+## Available Components
 
-Guess what, mine works unlike Vander Linde’s.
+- Surface
+- Text
+- Column
+- Row
+- Spacer
+- Box
+- Button
+- TextInputField
+- BreakFlow
+- Heading
+- Image
+- StaggeredGrid
 
----
+## Contribute to Docs
 
-# Kapsule
-
-Kapsule abstracts some low-level `kotlinx.html` components into compose-style building blocks while using `Modifier` chaining to generate CSS styles, similar to Jetpack Compose.
-
-**One thing to note**: Kapsule only uses Compose-*style* not Compose-*behavior*. The behaviour still depends on HTML/CSS (and JS if you add raw scripts). You should look up MDN docs or Stack Overflow when something doesn't behave like mobile Compose - that's the web dev experience.
-
-##### When to use Kapsule?
-- Server-side rendering static HTML
-- Generating raw HTML+styling without writing manual markup
-- Building static/simple pages with Compose-style Kotlin DSL
-
-**Not a fullstack framework**: Kapsule's motto isn't to be "yet another fullstack solution" or overengineer beyond its core goal — it strictly focuses on HTML/CSS generation with a Compose-like feel. If you need more than this, you're probably looking for Kobweb/Kweb instead.
-
-For documentation (generated with Kapsule itself 🦅), see the Kapsule docs.
-
-**Current state**: Still early (not all components/modifiers exist yet), but gives access to `kotlinx.html` under the hood.
+Help improve examples, explanations,
+and tutorials in the kapsule-docs repository (Ktor-powered and built with kapsule itself):
+https://github.com/sakethpathike/kapsule-docs
