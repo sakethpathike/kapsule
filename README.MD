@@ -4,6 +4,8 @@ making static HTML generation simpler and more expressive.
 Chain Modifier calls for CSS, compose layouts like in Compose,
 and avoid unnecessary overhead—just clean, structured HTML.
 
+*I originally built kapsule for my use cases, like the translation editor in the Linkora Localization Server. It’s still a personal project, but I’ve open-sourced it in case others find it helpful. Feel free to use it! Just note that I may not actively maintain it regularly.*
+
 ## Documentation
 
 [Documentation (built with kapsule) →](https://related-xaviera-sakethpathike-cd849e75.koyeb.app/)  
