@@ -25,6 +25,10 @@ _What you see is what kapsule can do._
 - Heading
 - Image
 - StaggeredGrid
+- MaterialIcon
+- Span
+- Div
+- InlineCode
 
 ## Contribute to Docs
 
