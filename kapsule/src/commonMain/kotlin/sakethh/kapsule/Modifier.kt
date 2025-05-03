@@ -71,6 +71,10 @@ class Modifier {
         appendNewStyle(property = "font-family", value)
     }
 
+    fun fontSize(value: String) = apply {
+        appendNewStyle(property = "font-size", value)
+    }
+
     fun size(value: String) = apply {
         height(value)
         width(value)

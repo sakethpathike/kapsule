@@ -55,7 +55,10 @@ fun HTML.Surface(
 
 fun FlowContent.Text(
     text: String,
-    fontSize: String = 12.px, fontFamily: String? = null, color: String? = null, fontWeight: String? = null,
+    fontSize: String = 12.px,
+    fontFamily: String? = null,
+    color: String? = null,
+    fontWeight: FontWeight? = null,
     display: Display? = Display.Inline,
     className: String? = null,
     id: String? = null,
@@ -70,7 +73,7 @@ fun FlowContent.Text(
         style = buildString {
 
             if (fontWeight != null) {
-                append("font-weight: $fontWeight; ")
+                append("font-weight: ${fontWeight.value()}; ")
             }
 
             if (color != null) {
@@ -162,7 +165,7 @@ fun FlowContent.Spacer(
 }
 
 fun FlowContent.Box(
-    modifier: Modifier,
+    modifier: Modifier = Modifier(),
     className: String? = null,
     onThisElement: DIV.() -> Unit = {},
     id: String? = null,
@@ -200,8 +203,7 @@ fun FlowContent.Button(
 fun FlowContent.TextInputField(
     value: String,
     className: String? = null,
-    id: String? = null,
-    fontWeight: String,
+    id: String? = null, fontWeight: FontWeight,
     fontSize: String,
     fontFamily: String,
     modifier: Modifier, onThisElement: INPUT.() -> Unit = {}
@@ -213,7 +215,7 @@ fun FlowContent.TextInputField(
         style = buildString {
             append("font-size: $fontSize; ")
             append("font-family: $fontFamily; ")
-            append("font-weight: $fontWeight; ")
+            append("font-weight: ${fontWeight.value()}; ")
             append(modifier.buildStyle())
         }
         this.value = value

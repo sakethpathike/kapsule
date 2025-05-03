@@ -52,3 +52,55 @@ sealed interface ObjectPosition {
     }
 }
 
+sealed interface FontWeight {
+    fun value(): String
+
+    enum class Predefined : FontWeight {
+        Thin {
+            override fun value() = "100"
+        },
+        ExtraLight {
+            override fun value() = "200"
+        },
+        Light {
+            override fun value() = "300"
+        },
+        Normal {
+            override fun value() = "400"
+        },
+        Medium {
+            override fun value() = "500"
+        },
+        SemiBold {
+            override fun value() = "600"
+        },
+        Bold {
+            override fun value() = "700"
+        },
+        ExtraBold {
+            override fun value() = "800"
+        },
+        Black {
+            override fun value() = "900"
+        },
+        ExtraBlack {
+            override fun value() = "1000"
+        },
+        NormalKeyword {
+            override fun value() = "normal"
+        },
+        BoldKeyword {
+            override fun value() = "bold"
+        },
+        Lighter {
+            override fun value() = "lighter"
+        },
+        Bolder {
+            override fun value() = "bolder"
+        }
+    }
+
+    data class Custom(val value: String) : FontWeight {
+        override fun value() = value
+    }
+}
