@@ -51,6 +51,10 @@ class Modifier {
         currentStyle.append("border: $width solid $color; border-radius: $radius; ")
     }
 
+    fun borderRadius(value: String) = apply {
+        appendNewStyle(property = "border-radius", value)
+    }
+
     fun width(value: String) = apply {
         currentStyle.append("width: $value; ")
     }
@@ -61,6 +65,10 @@ class Modifier {
 
     fun opacity(value: Double) = apply {
         currentStyle.append("opacity: $value; ")
+    }
+
+    fun fontFamily(value: String) = apply {
+        appendNewStyle(property = "font-family", value)
     }
 
     fun size(value: String) = apply {

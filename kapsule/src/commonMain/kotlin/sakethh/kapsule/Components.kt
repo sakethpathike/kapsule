@@ -239,15 +239,31 @@ fun FlowContent.Heading(
     level: Int,
     text: String,
     className: String? = null,
-    id: String? = null,
-    onThisElement: FlowOrHeadingContent.() -> Unit = {}
+    id: String? = null, onThisElement: FlowOrHeadingContent.() -> Unit = {}, modifier: Modifier = Modifier()
 ) {
     require(level in 1..6) { "Invalid heading level: $level" }
 
     headingBuilders[level - 1].invoke(this, className) {
         id?.let { attributes["id"] = it }
+        attributes["style"] = modifier.buildStyle()
         +text
         onThisElement()
+    }
+}
+
+fun FlowContent.InlineCode(
+    code: String,
+    className: String? = null,
+    id: String? = null,
+    modifier: Modifier = Modifier().backgroundColor("#BFC2FF").borderRadius(4.px).color("#272B60")
+        .custom("padding:2px 4px;")
+) {
+    code(classes = className) {
+        if (id != null) {
+            this.id = id
+        }
+        style = modifier.buildStyle()
+        +code
     }
 }
 
@@ -293,6 +309,60 @@ fun FlowContent.StaggeredGrid(
             append("column-gap: $columnGap; ")
             append(modifier.buildStyle())
         }
+        onThisElement()
+        content()
+    }
+}
+
+fun FlowContent.MaterialIcon(
+    iconCode: String,
+    id: String? = null,
+    modifier: Modifier = Modifier(),
+    onClick: String? = null,
+    onThisElement: SPAN.() -> Unit = {}
+) {
+    span(classes = "material-icons") {
+        if (id != null) {
+            this.id = id
+        }
+        style = modifier.buildStyle()
+        onThisElement()
+        if (onClick != null) {
+            this.onClick = onClick
+        }
+        +iconCode
+    }
+}
+
+fun FlowContent.Span(
+    className: String? = null,
+    id: String? = null,
+    modifier: Modifier = Modifier(),
+    onThisElement: SPAN.() -> Unit,
+    content: SPAN.() -> Unit
+) {
+    span(classes = className) {
+        if (id != null) {
+            this.id = id
+        }
+        style = modifier.buildStyle()
+        onThisElement()
+        content()
+    }
+}
+
+fun FlowContent.Div(
+    className: String? = null,
+    id: String? = null,
+    modifier: Modifier = Modifier(),
+    onThisElement: DIV.() -> Unit = {},
+    content: DIV.() -> Unit
+) {
+    div(classes = className) {
+        if (id != null) {
+            this.id = id
+        }
+        style = modifier.buildStyle()
         onThisElement()
         content()
     }
