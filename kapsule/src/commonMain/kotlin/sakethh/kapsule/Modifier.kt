@@ -32,6 +32,10 @@ class Modifier {
         appendNewStyle(property = "margin", value = px.px)
     }
 
+    fun margin(value: String) = apply {
+        appendNewStyle(property = "margin", value = value)
+    }
+
     fun margin(top: String = 0.px, bottom: String = 0.px, start: String = 0.px, end: String = 0.px) = apply {
         appendNewStyle(property = "margin-top", value = top)
         appendNewStyle(property = "margin-bottom", value = bottom)
