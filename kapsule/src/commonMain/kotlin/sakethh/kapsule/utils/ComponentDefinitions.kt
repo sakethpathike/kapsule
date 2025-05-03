@@ -53,54 +53,54 @@ sealed interface ObjectPosition {
 }
 
 sealed interface FontWeight {
-    fun value(): String
+    fun cssValue(): String
 
     enum class Predefined : FontWeight {
         Thin {
-            override fun value() = "100"
+            override fun cssValue() = "100"
         },
         ExtraLight {
-            override fun value() = "200"
+            override fun cssValue() = "200"
         },
         Light {
-            override fun value() = "300"
+            override fun cssValue() = "300"
         },
         Normal {
-            override fun value() = "400"
+            override fun cssValue() = "400"
         },
         Medium {
-            override fun value() = "500"
+            override fun cssValue() = "500"
         },
         SemiBold {
-            override fun value() = "600"
+            override fun cssValue() = "600"
         },
         Bold {
-            override fun value() = "700"
+            override fun cssValue() = "700"
         },
         ExtraBold {
-            override fun value() = "800"
+            override fun cssValue() = "800"
         },
         Black {
-            override fun value() = "900"
+            override fun cssValue() = "900"
         },
         ExtraBlack {
-            override fun value() = "1000"
+            override fun cssValue() = "1000"
         },
         NormalKeyword {
-            override fun value() = "normal"
+            override fun cssValue() = "normal"
         },
         BoldKeyword {
-            override fun value() = "bold"
+            override fun cssValue() = "bold"
         },
         Lighter {
-            override fun value() = "lighter"
+            override fun cssValue() = "lighter"
         },
         Bolder {
-            override fun value() = "bolder"
+            override fun cssValue() = "bolder"
         }
     }
 
     data class Custom(val value: String) : FontWeight {
-        override fun value() = value
+        override fun cssValue() = value
     }
 }

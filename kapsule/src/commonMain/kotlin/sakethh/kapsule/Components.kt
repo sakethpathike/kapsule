@@ -73,7 +73,7 @@ fun FlowContent.Text(
         style = buildString {
 
             if (fontWeight != null) {
-                append("font-weight: ${fontWeight.value()}; ")
+                append("font-weight: ${fontWeight.cssValue()}; ")
             }
 
             if (color != null) {
@@ -215,7 +215,7 @@ fun FlowContent.TextInputField(
         style = buildString {
             append("font-size: $fontSize; ")
             append("font-family: $fontFamily; ")
-            append("font-weight: ${fontWeight.value()}; ")
+            append("font-weight: ${fontWeight.cssValue()}; ")
             append(modifier.buildStyle())
         }
         this.value = value
