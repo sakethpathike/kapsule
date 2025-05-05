@@ -4,7 +4,7 @@ import kotlinx.html.*
 import sakethh.kapsule.utils.*
 
 fun HTML.Surface(
-    modifier: Modifier = Modifier(),
+    modifier: Modifier = Modifier,
     /**List of font URLs*/
     fonts: List<String> = emptyList(),
     style: STYLE.() -> Unit = {},
@@ -30,7 +30,7 @@ fun HTML.Surface(
         if (id != null) {
             this.id = id
         }
-        this.style = modifier.buildStyle()
+        this.style = modifier.toString()
         onTheBodyElement()
         content()
     }
@@ -64,7 +64,7 @@ fun FlowContent.Text(
     id: String? = null,
     textAlign: TextAlign = TextAlign.Start,
     onThisElement: DIV.() -> Unit = {},
-    modifier: Modifier = Modifier()
+    modifier: Modifier = Modifier
 ) {
     div(classes = className) {
         if (id != null) {
@@ -88,7 +88,7 @@ fun FlowContent.Text(
             if (display != null) {
                 append("display: ${display.cssValue}; ")
             }
-            append(modifier.buildStyle())
+            append(modifier.toString())
         }
         onThisElement()
         unsafe {
@@ -98,7 +98,7 @@ fun FlowContent.Text(
 }
 
 fun FlowContent.Column(
-    modifier: Modifier = Modifier(),
+    modifier: Modifier = Modifier,
     verticalAlignment: VerticalAlignment = VerticalAlignment.None,
     horizontalAlignment: HorizontalAlignment = HorizontalAlignment.None, className: String? = null, id: String? = null,
     onThisElement: DIV.() -> Unit = {},
@@ -117,7 +117,7 @@ fun FlowContent.Column(
             if (horizontalAlignment.value.isNotBlank()) {
                 append("align-items: ${horizontalAlignment.value}; ")
             }
-            append(modifier.buildStyle())
+            append(modifier.toString())
         }
         onThisElement()
         content()
@@ -126,7 +126,7 @@ fun FlowContent.Column(
 
 
 fun FlowContent.Row(
-    modifier: Modifier = Modifier(),
+    modifier: Modifier = Modifier,
     verticalAlignment: VerticalAlignment = VerticalAlignment.None,
     horizontalAlignment: HorizontalAlignment = HorizontalAlignment.None, className: String? = null, id: String? = null,
     onThisElement: DIV.() -> Unit = {},
@@ -145,7 +145,7 @@ fun FlowContent.Row(
             if (horizontalAlignment.value.isNotBlank()) {
                 append("align-items: ${horizontalAlignment.value}; ")
             }
-            append(modifier.buildStyle())
+            append(modifier.toString())
         }
         onThisElement()
         content()
@@ -153,19 +153,19 @@ fun FlowContent.Row(
 }
 
 fun FlowContent.Spacer(
-    className: String? = null, id: String? = null, onThisElement: DIV.() -> Unit = {}, modifier: Modifier = Modifier()
+    className: String? = null, id: String? = null, onThisElement: DIV.() -> Unit = {}, modifier: Modifier = Modifier
 ) {
     div(classes = className) {
         if (id != null) {
             this.id = id
         }
-        style = modifier.buildStyle()
+        style = modifier.toString()
         onThisElement()
     }
 }
 
 fun FlowContent.Box(
-    modifier: Modifier = Modifier(),
+    modifier: Modifier = Modifier,
     className: String? = null,
     onThisElement: DIV.() -> Unit = {},
     id: String? = null,
@@ -175,7 +175,7 @@ fun FlowContent.Box(
         if (id != null) {
             this.id = id
         }
-        style = modifier.buildStyle()
+        style = modifier.toString()
         onThisElement()
         init()
     }
@@ -193,7 +193,7 @@ fun FlowContent.Button(
         if (id != null) {
             this.id = id
         }
-        style = modifier.buildStyle()
+        style = modifier.toString()
         this.onClick = onClick()
         onThisElement()
         content()
@@ -216,7 +216,7 @@ fun FlowContent.TextInputField(
             append("font-size: $fontSize; ")
             append("font-family: $fontFamily; ")
             append("font-weight: ${fontWeight.cssValue()}; ")
-            append(modifier.buildStyle())
+            append(modifier.toString())
         }
         this.value = value
         onThisElement()
@@ -241,13 +241,13 @@ fun FlowContent.Heading(
     level: Int,
     text: String,
     className: String? = null,
-    id: String? = null, onThisElement: FlowOrHeadingContent.() -> Unit = {}, modifier: Modifier = Modifier()
+    id: String? = null, onThisElement: FlowOrHeadingContent.() -> Unit = {}, modifier: Modifier = Modifier
 ) {
     require(level in 1..6) { "Invalid heading level: $level" }
 
     headingBuilders[level - 1].invoke(this, className) {
         id?.let { attributes["id"] = it }
-        attributes["style"] = modifier.buildStyle()
+        attributes["style"] = modifier.toString()
         +text
         onThisElement()
     }
@@ -257,20 +257,20 @@ fun FlowContent.InlineCode(
     code: String,
     className: String? = null,
     id: String? = null,
-    modifier: Modifier = Modifier().backgroundColor("#BFC2FF").borderRadius(4.px).color("#272B60")
+    modifier: Modifier = Modifier.backgroundColor("#BFC2FF").borderRadius(4.px).color("#272B60")
         .custom("padding:2px 4px;")
 ) {
     code(classes = className) {
         if (id != null) {
             this.id = id
         }
-        style = modifier.buildStyle()
+        style = modifier.toString()
         +code
     }
 }
 
 fun FlowContent.Image(
-    modifier: Modifier = Modifier(),
+    modifier: Modifier = Modifier,
     alt: String? = null,
     src: String,
     id: String? = null,
@@ -284,7 +284,7 @@ fun FlowContent.Image(
         style = buildString {
             append("object-position: ${alignment.position()}; ")
             append("object-fit: ${contentScale.cssValue}; ")
-            append(modifier.buildStyle())
+            append(modifier.toString())
         }
         id?.let {
             this.id = it
@@ -294,7 +294,7 @@ fun FlowContent.Image(
 }
 
 fun FlowContent.StaggeredGrid(
-    modifier: Modifier = Modifier(),
+    modifier: Modifier = Modifier,
     columnCount: Int,
     columnGap: String = 16.px,
     className: String? = null,
@@ -309,7 +309,7 @@ fun FlowContent.StaggeredGrid(
         style = buildString {
             append("column-count: $columnCount; ")
             append("column-gap: $columnGap; ")
-            append(modifier.buildStyle())
+            append(modifier.toString())
         }
         onThisElement()
         content()
@@ -319,7 +319,7 @@ fun FlowContent.StaggeredGrid(
 fun FlowContent.MaterialIcon(
     iconCode: String,
     id: String? = null,
-    modifier: Modifier = Modifier(),
+    modifier: Modifier = Modifier,
     onClick: String? = null,
     onThisElement: SPAN.() -> Unit = {}
 ) {
@@ -327,7 +327,7 @@ fun FlowContent.MaterialIcon(
         if (id != null) {
             this.id = id
         }
-        style = modifier.buildStyle()
+        style = modifier.toString()
         onThisElement()
         if (onClick != null) {
             this.onClick = onClick
@@ -339,7 +339,7 @@ fun FlowContent.MaterialIcon(
 fun FlowContent.Span(
     className: String? = null,
     id: String? = null,
-    modifier: Modifier = Modifier(),
+    modifier: Modifier = Modifier,
     onThisElement: SPAN.() -> Unit,
     content: SPAN.() -> Unit
 ) {
@@ -347,7 +347,7 @@ fun FlowContent.Span(
         if (id != null) {
             this.id = id
         }
-        style = modifier.buildStyle()
+        style = modifier.toString()
         onThisElement()
         content()
     }
@@ -356,7 +356,7 @@ fun FlowContent.Span(
 fun FlowContent.Div(
     className: String? = null,
     id: String? = null,
-    modifier: Modifier = Modifier(),
+    modifier: Modifier = Modifier,
     onThisElement: DIV.() -> Unit = {},
     content: DIV.() -> Unit
 ) {
@@ -364,7 +364,7 @@ fun FlowContent.Div(
         if (id != null) {
             this.id = id
         }
-        style = modifier.buildStyle()
+        style = modifier.toString()
         onThisElement()
         content()
     }
