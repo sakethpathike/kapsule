@@ -59,10 +59,13 @@ fun Modifier.padding(value: String) = run {
 }
 
 fun Modifier.padding(top: String = 0.px, bottom: String = 0.px, start: String = 0.px, end: String = 0.px) = run {
-    appendNewStyle(property = "padding-top", value = top)
-    appendNewStyle(property = "padding-end", value = end)
-    appendNewStyle(property = "padding-start", value = start)
-    appendNewStyle(property = "padding-bottom", value = bottom)
+    appendNewStyle(property = "padding-top", value = top).then(
+            appendNewStyle(property = "padding-end", value = end)
+        ).then(
+            appendNewStyle(property = "padding-start", value = start)
+        ).then(
+            appendNewStyle(property = "padding-bottom", value = bottom)
+        )
 }
 
 fun Modifier.margin(px: Int) = run {
@@ -74,10 +77,13 @@ fun Modifier.margin(value: String) = run {
 }
 
 fun Modifier.margin(top: String = 0.px, bottom: String = 0.px, start: String = 0.px, end: String = 0.px) = run {
-    appendNewStyle(property = "margin-top", value = top)
-    appendNewStyle(property = "margin-bottom", value = bottom)
-    appendNewStyle(property = "margin-inline-start", value = start)
-    appendNewStyle(property = "margin-inline-end", value = end)
+    appendNewStyle(property = "margin-top", value = top).then(
+        appendNewStyle(property = "margin-bottom", value = bottom)
+    ).then(
+        appendNewStyle(property = "margin-inline-start", value = start)
+    ).then(
+        appendNewStyle(property = "margin-inline-end", value = end)
+    )
 }
 
 fun Modifier.border(radius: Int, color: String, width: Int = 1) = run {
@@ -113,8 +119,9 @@ fun Modifier.fontSize(value: String) = run {
 }
 
 fun Modifier.size(value: String) = run {
-    height(value)
-    width(value)
+    height(value).then(
+        width(value)
+    )
 }
 
 /**
@@ -200,8 +207,9 @@ Sets width and height to 100% of the parent.
 - Use [fillViewportSize] when you want to fill the full screen.
  * */
 fun Modifier.fillMaxSize(fraction: Double = 1.0) = run {
-    fillMaxWidth(fraction)
-    fillMaxHeight(fraction)
+    fillMaxWidth(fraction).then(
+        fillMaxHeight(fraction)
+    )
 }
 
 fun Modifier.matchParentWidth() = run {
@@ -213,16 +221,18 @@ fun Modifier.matchParentHeight() = run {
 }
 
 fun Modifier.matchParentSize() = run {
-    matchParentWidth()
-    matchParentHeight()
+    matchParentWidth().then(
+        matchParentHeight()
+    )
 }
 
 /**
 Use `fillViewportSize()` when you want an element to fill the full screen.
  */
 fun Modifier.fillViewportSize() = run {
-    appendNewStyle(property = "width", value = 100.vw)
-    appendNewStyle(property = "height", value = 100.vh)
+    appendNewStyle(property = "width", value = 100.vw).then(
+        appendNewStyle(property = "height", value = 100.vh)
+    )
 }
 
 fun Modifier.minHeight(value: String) = run {
@@ -481,8 +491,9 @@ fun Modifier.clip(shape: Shape, overflow: Overflow = Overflow.Hidden) = run {
     require(shape.buildPath().isNotBlank() && overflow.cssValue.isNotBlank()) {
         "Both shape path and overflow value must be provided and cannot be empty."
     }
-    appendNewStyle(property = "clip-path", value = shape.buildPath().ensureSemicolon())
-    appendNewStyle(property = "overflow", value = overflow.cssValue)
+    appendNewStyle(property = "clip-path", value = shape.buildPath().ensureSemicolon()).then(
+        appendNewStyle(property = "overflow", value = overflow.cssValue)
+    )
 }
 
 /**
