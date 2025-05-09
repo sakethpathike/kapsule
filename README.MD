@@ -1,3 +1,7 @@
+### kapsule
+
+![Maven Central Version](https://img.shields.io/maven-central/v/io.github.sakethpathike/kapsule?style=for-the-badge&labelColor=131318&color=BFC2FF)
+
 **kapsule** is a Kotlin Multiplatform library
 that wraps `kotlinx.html` with Jetpack Compose-style modifiers and layout semantics,
 making static HTML generation simpler and more expressive.
