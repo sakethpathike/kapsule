@@ -16,6 +16,10 @@ interface Modifier {
             */
             return other
         }
+
+        override fun toString(): String {
+            return ""
+        }
     }
 }
 
