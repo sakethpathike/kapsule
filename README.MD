@@ -12,7 +12,7 @@ and avoid unnecessary overhead—just clean, structured HTML.
 
 ## Documentation
 
-[Documentation (built with kapsule) →](https://related-xaviera-sakethpathike-cd849e75.koyeb.app/)  
+[Documentation (built with kapsule) →](https://kapsule-docs.onrender.com/)  
 _What you see is what kapsule can do._
 > Docs are a work-in-progress. But if you're familiar with Jetpack Compose, kapsule will feel instantly familiar.
 > I’ve included comments in the code for most modifiers, so your IDE's doc preview should help you out.
