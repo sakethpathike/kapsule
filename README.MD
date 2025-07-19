@@ -95,9 +95,9 @@ Chain modifiers for styling, compose layouts like in Compose, and get clean HTML
 
 ## Documentation
 [Documentation (built with kapsule) →](https://kapsule-docs.onrender.com/)  
-The docs showcase what kapsule can do since they're built entirely with the library itself. If you know Jetpack Compose, you'll recognize the patterns. Component methods include inline documentation, so your IDE will help you out.
+The docs showcase what kapsule can do since they're built entirely with the library itself. If you know Jetpack Compose, you'll recognize the patterns. Components and modifiers include inline documentation, so your IDE will help you out.
 
-*I built kapsule for my projects like Linkora's browser extension UI and localization editor. I'll accept pull requests, but I may not actively maintain it.*
+*I built kapsule for my own projects like Linkora's browser extension UI and localization editor. I'll accept pull requests but may not actively maintain it.*
 
 ## Contribute to Docs
 Help improve examples, explanations, and tutorials:
